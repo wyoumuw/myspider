@@ -16,13 +16,6 @@ public interface ProxyPool<T extends Proxy> {
     T get();
 
     /**
-     * get num Proxy from pool
-     * @param num how many proxies will be return
-     * @return proxy
-     */
-    T get(int num);
-
-    /**
      * evict all proxy that dead from this pool
      * @return evict proxy number
      */

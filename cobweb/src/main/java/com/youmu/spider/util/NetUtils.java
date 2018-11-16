@@ -1,16 +1,15 @@
 package com.youmu.spider.util;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
 /**
  * @Author: YOUMU
  */
-public final class HttClientUtils {
+public final class NetUtils {
 
-    private HttClientUtils() {
+    private NetUtils() {
     }
 
     /**
@@ -28,6 +27,12 @@ public final class HttClientUtils {
             socket.connect(address, time);
         } catch (IOException e) {
             return false;
+        }finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
