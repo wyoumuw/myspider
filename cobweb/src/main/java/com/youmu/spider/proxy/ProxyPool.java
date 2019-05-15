@@ -24,4 +24,6 @@ public interface ProxyPool<T extends Proxy> {
     void put(T proxy);
 
     void putAll(List<T> proxies);
+
+    List<T> getAll();
 }

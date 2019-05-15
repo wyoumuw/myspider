@@ -25,7 +25,7 @@ public class XiciProxyPoolTest {
 		@Override
 		protected String pullXiciHtml() {
 			try {
-				return FileUtils.readFileToString(new File("C:\\Users\\ucmed\\Desktop\\ゴミ\\国内高匿免费HTTP代理IP__第1页国内高匿(1)\\国内高匿免费HTTP代理IP__第1页国内高匿.html"), "utf-8");
+				return FileUtils.readFileToString(new File("G:\\disktop\\ゴミ\\国内高匿免费HTTP代理IP__第1页国内高匿(1)\\国内高匿免费HTTP代理IP__第1页国内高匿.html"), "utf-8");
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -42,6 +42,7 @@ public class XiciProxyPoolTest {
 
 	@Test
 	public void mockPullTest() throws IOException {
-		System.out.println(xiciProxyPool.refreshPool());
+		int i = xiciProxyPool.refreshPool();
+		System.out.println(xiciProxyPool.getAll());
 	}
 }

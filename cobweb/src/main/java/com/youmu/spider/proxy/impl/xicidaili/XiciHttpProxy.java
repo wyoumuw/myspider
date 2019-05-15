@@ -11,4 +11,12 @@ public class XiciHttpProxy extends HttpProxy {
 		super(model.getIp(), model.getPort());
 		data = model;
 	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("XiciHttpProxy{");
+		sb.append("data=").append(data);
+		sb.append('}');
+		return sb.toString();
+	}
 }

@@ -1,26 +1,35 @@
 package com.youmu.spide;
 
+import com.youmu.spide.util.DbUtils;
+import com.youmu.spider.proxy.impl.xicidaili.XiciHttpProxy;
 import com.youmu.spider.proxy.impl.xicidaili.XiciProxyModel;
+import com.youmu.spider.proxy.impl.xicidaili.XiciProxyPool;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Hello world!
  */
 public class App {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		Class.forName("org.h2.Driver");
-		Connection connection = DriverManager.getConnection("jdbc:h2:./test");
-		Statement statement = connection.createStatement();
-		System.out.println(statement.execute(getDDL()));
-		connection.commit();
-		System.out.println(getDDL());
+		XiciProxyPool proxyPool = getProxyPool();
+		proxyPool.refreshPool();
+		List<XiciHttpProxy> all = proxyPool.getAll();
+
+		System.out.println();
+	}
+
+	private static void init() {
+		// 初始化数据库
+		DbUtils.execute(getDDL());
+	}
+
+	private static XiciProxyPool getProxyPool() {
+		return new XiciProxyPool();
 	}
 
 	public static String getDDL() {

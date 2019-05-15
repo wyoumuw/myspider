@@ -110,6 +110,18 @@ public class XiciProxyModel {
 		this.validateTime = validateTime;
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("XiciProxyModel{");
+		sb.append("ip='").append(ip).append('\'');
+		sb.append(", port=").append(port);
+		sb.append(", location='").append(location).append('\'');
+		sb.append(", highAnonymous=").append(highAnonymous);
+		sb.append(", type=").append(type);
+		sb.append('}');
+		return sb.toString();
+	}
+
 	//--------------------------------
 	public static final boolean isHighAnonymous(String text) {
 		return "高匿".equals(text);

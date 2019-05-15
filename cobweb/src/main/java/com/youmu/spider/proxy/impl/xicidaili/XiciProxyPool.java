@@ -33,6 +33,9 @@ public class XiciProxyPool implements ProxyPool<XiciHttpProxy> {
 
 	@Override
 	public XiciHttpProxy get() {
+		if (0 == pool.size()) {
+			return null;
+		}
 		Random random = new Random();
 		int index = random.nextInt(pool.size());
 		return pool.get(index);
@@ -75,6 +78,8 @@ public class XiciProxyPool implements ProxyPool<XiciHttpProxy> {
 				xiciProxyModel.setAliveTimeSec(TimeUnit.MILLISECONDS.toSeconds(XiciProxyModel.parseCnTime(td.eq(8).text())));
 				xiciProxyModel.setValidateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(td.eq(9).text()));
 				newPool.add(new XiciHttpProxy(xiciProxyModel));
+				logger.info("success parse a proxy:\n{}", xiciProxyModel);
+
 			} catch (Exception e) {
 				logger.warn("抛弃一个无法解析的代理:{}", tr.html(), e);
 			}
@@ -104,5 +109,12 @@ public class XiciProxyPool implements ProxyPool<XiciHttpProxy> {
 	@Override
 	public void putAll(List<XiciHttpProxy> proxies) {
 		pool.addAll(proxies);
+	}
+
+	@Override
+	public List<XiciHttpProxy> getAll() {
+		List<XiciHttpProxy> xiciHttpProxies = new ArrayList<>(pool.size() << 1);
+		xiciHttpProxies.addAll(pool);
+		return xiciHttpProxies;
 	}
 }
